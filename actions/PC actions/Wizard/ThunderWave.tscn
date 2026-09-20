@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dhg54jxr020vk" path="res://assets/vfx/npt_nyknck/NPT101.png" id="4_a6jhq"]
 [ext_resource type="Texture2D" uid="uid://dk6blmrmiq0qa" path="res://assets/vfx/npt_nyknck/NPT102.png" id="5_5o1y7"]
 [ext_resource type="Texture2D" uid="uid://23jr6mmsx0xh" path="res://assets/vfx/npt_nyknck/NPT103.png" id="6_tlcub"]
-[ext_resource type="AudioStream" uid="uid://btkihbt1oq7ic" path="res://assets/sfx/pc actions/wizard/Wizard-Wind.mp3" id="7_etfmf"]
+[ext_resource type="AudioStream" uid="uid://btkihbt1oq7ic" path="res://assets/sfx/pc/wizard/Wizard-Wind.mp3" id="7_amox5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqkwj"]
 radius = 56.0
@@ -143,7 +143,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_etfmf")]
+"values": [ExtResource("7_amox5")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -184,7 +184,7 @@ sprite_frames = SubResource("SpriteFrames_4524x")
 animation = &"action"
 
 [node name="ActionAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_etfmf")
+stream = ExtResource("7_amox5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Timer")

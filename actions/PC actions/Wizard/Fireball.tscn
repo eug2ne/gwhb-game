@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://48024yqm2gib" path="res://assets/vfx/explosion/Explosion/10.png" id="12_g74p3"]
 [ext_resource type="Texture2D" uid="uid://bt8ij6keyqdda" path="res://assets/vfx/explosion/Explosion/11.png" id="13_wwv7l"]
 [ext_resource type="Texture2D" uid="uid://ppu1r2c14wmo" path="res://assets/vfx/explosion/Explosion/12.png" id="14_vfqaw"]
-[ext_resource type="AudioStream" uid="uid://dlskiy3vd03s8" path="res://assets/sfx/pc actions/wizard/Wizard-Fireball.mp3" id="15_e6p3a"]
+[ext_resource type="AudioStream" uid="uid://dlskiy3vd03s8" path="res://assets/sfx/pc/wizard/Wizard-Fireball.mp3" id="15_jhh2n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f04c5"]
 radius = 112.0
@@ -175,7 +175,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("15_e6p3a")]
+"values": [ExtResource("15_jhh2n")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -217,7 +217,7 @@ sprite_frames = SubResource("SpriteFrames_44tdq")
 animation = &"action"
 
 [node name="ActionAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_e6p3a")
+stream = ExtResource("15_jhh2n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

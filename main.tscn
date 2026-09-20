@@ -68,17 +68,14 @@ y_sort_enabled = true
 [node name="Gladiator" parent="PCs" groups=["pc"] instance=ExtResource("2_l72q6")]
 material = SubResource("ShaderMaterial_4gvr3")
 position = Vector2(368, 560)
-current = null
 
 [node name="Wizard" parent="PCs" groups=["pc"] instance=ExtResource("6_c2o31")]
 material = SubResource("ShaderMaterial_6vexe")
 position = Vector2(560, 560)
-current = null
 
 [node name="Healer" parent="PCs" groups=["pc"] instance=ExtResource("5_poar1")]
 material = SubResource("ShaderMaterial_wjyme")
 position = Vector2(736, 560)
-current = null
 
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true

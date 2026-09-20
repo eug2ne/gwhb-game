@@ -200,7 +200,6 @@ position = Vector2(1.35525e-20, 0)
 scale = Vector2(1.33333, 1.5)
 sprite_frames = SubResource("SpriteFrames_j2tkj")
 animation = &"action"
-frame = 6
 
 [node name="ActionAudio" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMP3_2xuah")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dvpthewkuttia"]
+[gd_scene load_steps=50 format=3 uid="uid://dvpthewkuttia"]
 
 [ext_resource type="Script" path="res://character/player/PC.gd" id="1_fhjl8"]
 [ext_resource type="Material" uid="uid://b5sfgjat7dyv0" path="res://character/character shaders/pc_material.tres" id="1_tkqss"]
@@ -23,7 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://cg276xwxjs0t" path="res://assets/0x72_DungeonTilesetII_v1.7/frames/knight_f_run_anim_f3.png" id="13_gcvg5"]
 [ext_resource type="SpriteFrames" uid="uid://b0686be3mwgj8" path="res://assets/spriteframes/action spriteframes/Eggshell.tres" id="14_6ls5k"]
 [ext_resource type="Script" path="res://character/player/PC states/PC_Idle.gd" id="14_umevl"]
-[ext_resource type="AudioStream" uid="uid://ctjswfjqog60d" path="res://assets/sfx/pc actions/dash.mp3" id="16_kwm5w"]
+[ext_resource type="AudioStream" uid="uid://ctjswfjqog60d" path="res://assets/sfx/pc/dash.mp3" id="16_kwm5w"]
+[ext_resource type="AudioStream" uid="uid://us1660377xji" path="res://assets/sfx/pc/gladiator/Gladiator-Death.mp3" id="17_fy54y"]
 [ext_resource type="PackedScene" uid="uid://dufbyrveswvnq" path="res://actions/PC actions/Gladiator/Boost.tscn" id="18_rj0lb"]
 [ext_resource type="Script" path="res://character/state machine/character states/Dead.gd" id="24_eshk6"]
 
@@ -170,6 +171,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DeathAudio:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_fy54y")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DeathAudio:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_xbyvt"]
 resource_name = "dash"
@@ -296,6 +321,30 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0, 0.785398, 1.5708]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DeathAudio:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_fy54y")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DeathAudio:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_wt80u"]
@@ -530,6 +579,9 @@ animation = &"eggshell"
 
 [node name="DashAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_kwm5w")
+
+[node name="DeathAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_fy54y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
