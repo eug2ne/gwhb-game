@@ -218,6 +218,7 @@ animation = &"action"
 
 [node name="ActionAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_jhh2n")
+volume_db = 7.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

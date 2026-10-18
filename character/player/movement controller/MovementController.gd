@@ -36,9 +36,9 @@ func _handle_process(_delta) -> void:
 	# FIXME: when player take damage, damage animation interrupted by movement animation
 		## need to play both animations at the same time
 	# handle parent animation
-	if SPEED == DEFAULT_SPEED:
+	if SPEED == DEFAULT_SPEED && abs(parent.velocity) > Vector2(0,0):
 		anim.play("move")
-	elif SPEED == IDLE_SPEED:
+	else:
 		anim.play("idle")
 	# flip sprite according to parent.velocity
 	if parent.velocity.x < 0:

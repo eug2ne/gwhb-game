@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bje8xclox6jiu"]
+[gd_scene load_steps=17 format=3 uid="uid://bje8xclox6jiu"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tuq5s"]
 [ext_resource type="PackedScene" uid="uid://b15kbyg7k4fwd" path="res://map/bar_map.tscn" id="1_yokby"]
 [ext_resource type="PackedScene" uid="uid://dvpthewkuttia" path="res://character/player/PCs/Gladiator.tscn" id="2_l72q6"]
 [ext_resource type="PackedScene" uid="uid://cqkd670a24rn" path="res://UI/Combat_UI.tscn" id="2_v70x6"]
+[ext_resource type="AudioStream" uid="uid://ce2rt5ndsdl5w" path="res://assets/bgm/main theme.mp3" id="2_y8ebi"]
 [ext_resource type="Shader" path="res://character/character shaders/character_flash.gdshader" id="3_ga1au"]
 [ext_resource type="PackedScene" uid="uid://ccx8e1l6enf1q" path="res://character/player/PCs/Healer.tscn" id="5_poar1"]
 [ext_resource type="PackedScene" uid="uid://c44b2lj3ngcko" path="res://character/player/PCs/Wizard.tscn" id="6_c2o31"]
@@ -37,6 +38,11 @@ shader_parameter/flash_modifier = 0.0
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tuq5s")
+
+[node name="bgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_y8ebi")
+volume_db = -15.0
+autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

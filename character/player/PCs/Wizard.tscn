@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c44b2lj3ngcko"]
+[gd_scene load_steps=51 format=3 uid="uid://c44b2lj3ngcko"]
 
 [ext_resource type="Material" uid="uid://b5sfgjat7dyv0" path="res://character/character shaders/pc_material.tres" id="1_wrfyk"]
 [ext_resource type="Script" path="res://character/player/PC.gd" id="2_frjc6"]
@@ -20,9 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://df3nl2bqjar4w" path="res://assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_run_anim_f2.png" id="12_aeilh"]
 [ext_resource type="Texture2D" uid="uid://b2fw5183tiweh" path="res://assets/0x72_DungeonTilesetII_v1.7/frames/wizzard_m_run_anim_f3.png" id="13_ba3jw"]
 [ext_resource type="SpriteFrames" uid="uid://b0686be3mwgj8" path="res://assets/spriteframes/action spriteframes/Eggshell.tres" id="14_hqlq8"]
-[ext_resource type="AudioStream" uid="uid://dhcumrgj1fuo1" path="res://assets/sfx/pc/wizard/Wizard-Death.mp3" id="15_mgm07"]
+[ext_resource type="Script" path="res://character/audio manager/Audio Manager.gd" id="15_1p5t4"]
+[ext_resource type="AudioStream" uid="uid://dtl8ow4mwf7qd" path="res://assets/sfx/pc/wizard/Wizard-death_2.mp3" id="16_dh5bx"]
 [ext_resource type="PackedScene" uid="uid://c2p4lpdcnk2ml" path="res://actions/PC actions/Wizard/ThunderWave.tscn" id="16_kbodc"]
+[ext_resource type="AudioStream" uid="uid://deo48k43mjd1n" path="res://assets/sfx/pc/wizard/Wizard-move.mp3" id="16_qr76u"]
 [ext_resource type="PackedScene" uid="uid://ccwlcsho8wqxb" path="res://actions/PC actions/Wizard/Lightning.tscn" id="17_jycb6"]
+[ext_resource type="AudioStream" uid="uid://ca1wiqy7hmkeg" path="res://assets/sfx/pc/wizard/Wizard-idle move.mp3" id="17_kqkq7"]
 [ext_resource type="PackedScene" uid="uid://m68cprrbwc2n" path="res://actions/PC actions/Wizard/Fireball.tscn" id="18_18qr8"]
 [ext_resource type="Script" path="res://character/state machine/character states/Dead.gd" id="22_wan1k"]
 
@@ -172,26 +175,26 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("DeathAudio:stream")
+tracks/3/path = NodePath("AudioManager/DeathAudio:stream")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("15_mgm07")]
+"values": [ExtResource("16_dh5bx")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("DeathAudio:playing")
+tracks/4/path = NodePath("AudioManager/DeathAudio:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_xbyvt"]
@@ -299,19 +302,19 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("DeathAudio:stream")
+tracks/5/path = NodePath("AudioManager/DeathAudio:stream")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("15_mgm07")]
+"values": [ExtResource("16_dh5bx")]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("DeathAudio:playing")
+tracks/6/path = NodePath("AudioManager/DeathAudio:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -389,6 +392,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["MoveAudio"],
+"method": &"_play_audio"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vunnn"]
@@ -547,8 +564,18 @@ animation = &"idle"
 sprite_frames = ExtResource("14_hqlq8")
 animation = &"eggshell"
 
-[node name="DeathAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_mgm07")
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("15_1p5t4")
+
+[node name="DeathAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("16_dh5bx")
+
+[node name="MoveAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("16_qr76u")
+
+[node name="IdleMoveAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("17_kqkq7")
+volume_db = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

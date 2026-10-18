@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccwlcsho8wqxb"]
+[gd_scene load_steps=16 format=3 uid="uid://ccwlcsho8wqxb"]
 
 [ext_resource type="Script" path="res://actions/PC actions/Wizard/Lightning.gd" id="1_8ayop"]
 [ext_resource type="Resource" uid="uid://cpddqla3m1wo2" path="res://actions/PC actions/action resources/Wizard/Lightning.tres" id="2_o20k2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://crsoxmesa6jwg" path="res://assets/vfx/LT100_nyknck/LT104.png" id="7_qdisb"]
 [ext_resource type="Texture2D" uid="uid://cj3kdrk57i2jd" path="res://assets/vfx/LT100_nyknck/LT105.png" id="8_2d12g"]
 [ext_resource type="Texture2D" uid="uid://by0l88edxxvbw" path="res://assets/vfx/LT100_nyknck/LT106.png" id="9_2qhr1"]
+[ext_resource type="AudioStream" uid="uid://c6q2xfjd2wu1a" path="res://assets/sfx/pc/wizard/Wizard-Electricity.mp3" id="10_th75i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k36ta"]
 size = Vector2(160, 96)
@@ -92,6 +93,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ActionAudio:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_th75i")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ActionAudio:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_atklc"]
 resource_name = "action"
@@ -144,6 +169,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ActionAudio:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_th75i")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ActionAudio:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ptqks"]
 _data = {
@@ -172,6 +221,7 @@ sprite_frames = SubResource("SpriteFrames_oqg7e")
 animation = &"action"
 
 [node name="ActionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_th75i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

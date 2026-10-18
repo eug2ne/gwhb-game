@@ -17,7 +17,11 @@ func _on_exit() -> void:
 	parent.get_node("CollisionShape2D").disabled = false
 	# set next_state
 	next_state = default_state
-	
+
+func _update_input(event) -> void:
+	# handle basic movement
+	movement_controller._handle_input(event)
+
 func _update_physics(delta):
 	movement_controller._handle_physics(delta)
 
