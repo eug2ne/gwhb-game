@@ -23,9 +23,9 @@
 [ext_resource type="Script" path="res://character/audio manager/Audio Manager.gd" id="15_1p5t4"]
 [ext_resource type="AudioStream" uid="uid://dtl8ow4mwf7qd" path="res://assets/sfx/pc/wizard/Wizard-death_2.mp3" id="16_dh5bx"]
 [ext_resource type="PackedScene" uid="uid://c2p4lpdcnk2ml" path="res://actions/PC actions/Wizard/ThunderWave.tscn" id="16_kbodc"]
-[ext_resource type="AudioStream" uid="uid://deo48k43mjd1n" path="res://assets/sfx/pc/wizard/Wizard-move.mp3" id="16_qr76u"]
+[ext_resource type="AudioStream" uid="uid://ctjswfjqog60d" path="res://assets/sfx/pc/pc-dash.mp3" id="17_2alwf"]
+[ext_resource type="AudioStream" uid="uid://m3ikim76whko" path="res://assets/sfx/pc/pc-move.mp3" id="17_ebdqm"]
 [ext_resource type="PackedScene" uid="uid://ccwlcsho8wqxb" path="res://actions/PC actions/Wizard/Lightning.tscn" id="17_jycb6"]
-[ext_resource type="AudioStream" uid="uid://ca1wiqy7hmkeg" path="res://assets/sfx/pc/wizard/Wizard-idle move.mp3" id="17_kqkq7"]
 [ext_resource type="PackedScene" uid="uid://m68cprrbwc2n" path="res://actions/PC actions/Wizard/Fireball.tscn" id="18_18qr8"]
 [ext_resource type="Script" path="res://character/state machine/character states/Dead.gd" id="22_wan1k"]
 
@@ -172,30 +172,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AudioManager/DeathAudio:stream")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("16_dh5bx")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AudioManager/DeathAudio:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_xbyvt"]
 resource_name = "dash"
@@ -235,6 +211,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.0823529, 0.811765, 1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioManager")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["DashAudio"],
+"method": &"_play_audio"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_6ljb5"]
@@ -567,15 +557,14 @@ animation = &"eggshell"
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("15_1p5t4")
 
+[node name="MoveAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("17_ebdqm")
+
+[node name="DashAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("17_2alwf")
+
 [node name="DeathAudio" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("16_dh5bx")
-
-[node name="MoveAudio" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("16_qr76u")
-
-[node name="IdleMoveAudio" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("17_kqkq7")
-volume_db = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

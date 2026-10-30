@@ -308,6 +308,7 @@ animation = &"lockon"
 
 [node name="AlertAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_s0dg8")
+volume_db = 10.0
 
 [node name="LockonAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_impvy")

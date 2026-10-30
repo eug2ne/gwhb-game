@@ -5,5 +5,5 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_rbv6b")
-shader_parameter/flash_color = Color(0.952941, 0.168627, 0.270588, 1)
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0

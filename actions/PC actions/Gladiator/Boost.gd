@@ -25,7 +25,7 @@ func _on_boost_timer_timeout():
 	anim.stop()
 	target_area.visible = false
 	# reset bonus ap, critical rate
-	parent.character_resource.bonus_ap = base_power
-	parent.character_resource.bonus_critical_rate = base_critical
+	parent.character_resource.power = base_power
+	parent.character_resource.critical = base_critical
 	base_power = 0
 	base_critical = 0
