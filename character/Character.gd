@@ -8,6 +8,8 @@ var revivable: bool
 @onready var action_manager: ActionManager = $ActionManager
 @onready var state_manager: StateManager = $StateManager
 @onready var effects_anim: AnimationPlayer = $EffectsAnimationPlayer
+@export var freeze_time_scale: float = 0.025 # DEFAULT for basic action
+@export var freeze_duration: float = 0.5 # DEFAULT for basic action
 
 func _ready() -> void:
 	# set max_hp
@@ -51,6 +53,8 @@ func _take_debuff(debuff: int, debuff_stat: String) -> void:
 	character_resource[debuff_stat] -= debuff
 	# pass debuff to indicator
 	indicator._show_debuff()
+	if effects_anim.has_animation("debuff"):
+		effects_anim.play("debuff")
 
 func _take_death() -> void:
 	# remove character from enemy target when dead
@@ -79,3 +83,11 @@ func _revive(recover: int, critical: bool) -> void:
 
 func _is_dead() -> bool:
 	return state_manager._get_current_state().name.to_lower() == "dead"
+
+func _on_anim_started(anim_name: String) -> void:
+	if (anim_name == "damage"):
+		Engine.time_scale = freeze_time_scale
+
+func _on_anim_finished(anim_name: String) -> void:
+	if (anim_name == "damage"):
+		Engine.time_scale = 1.0

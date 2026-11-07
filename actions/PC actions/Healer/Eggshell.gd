@@ -10,7 +10,8 @@ func _start() -> void:
 		pc._start_eggshell()
 	
 	# start cool-time timer
+	action_available = false
 	timer.start(cool_time)
-	
+
 func _stop() -> void:
 	super()

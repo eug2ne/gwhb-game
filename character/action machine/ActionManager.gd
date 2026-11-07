@@ -33,7 +33,7 @@ func _input(event):
 	
 	if event.is_action_pressed("secondary_action") && secondary_action.action_available:
 		secondary_action._start()
-		
+	
 	if event.is_action_pressed("special_action") && special_action.action_available:
 		special_action._start()
 

@@ -9,7 +9,7 @@ func _ready():
 
 func _physics_process(_delta) -> void:
 	move_and_slide()
-	
+
 func _take_damage(damage: int, critical: bool, from: Character) -> void:
 	super(damage, critical, from)
 	

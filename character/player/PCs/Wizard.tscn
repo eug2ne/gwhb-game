@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c44b2lj3ngcko"]
+[gd_scene load_steps=53 format=3 uid="uid://c44b2lj3ngcko"]
 
 [ext_resource type="Material" uid="uid://b5sfgjat7dyv0" path="res://character/character shaders/pc_material.tres" id="1_wrfyk"]
 [ext_resource type="Script" path="res://character/player/PC.gd" id="2_frjc6"]
@@ -27,6 +27,8 @@
 [ext_resource type="AudioStream" uid="uid://m3ikim76whko" path="res://assets/sfx/pc/pc-move.mp3" id="17_ebdqm"]
 [ext_resource type="PackedScene" uid="uid://ccwlcsho8wqxb" path="res://actions/PC actions/Wizard/Lightning.tscn" id="17_jycb6"]
 [ext_resource type="PackedScene" uid="uid://m68cprrbwc2n" path="res://actions/PC actions/Wizard/Fireball.tscn" id="18_18qr8"]
+[ext_resource type="AudioStream" uid="uid://bsrgp8r6ew4gd" path="res://assets/sfx/pc/wizard/Wizard-damage_2.mp3" id="18_b0cep"]
+[ext_resource type="AudioStream" uid="uid://c3613pxai6e8l" path="res://assets/sfx/pc/pc-heal.mp3" id="19_5vej3"]
 [ext_resource type="Script" path="res://character/state machine/character states/Dead.gd" id="22_wan1k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ynfcu"]
@@ -437,6 +439,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [1.0, 0.5, 1.0, 0.5, 1.0, 0.0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["DamageAudio"],
+"method": &"_play_audio"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_yl0wv"]
 resource_name = "eggshell"
@@ -517,6 +533,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [1.0, 0.0, 1.0, 0.0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["HealAudio"],
+"method": &"_play_audio"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ejjp"]
 _data = {
@@ -526,12 +556,11 @@ _data = {
 "heal": SubResource("Animation_l13wj")
 }
 
-[node name="Wizard" type="CharacterBody2D"]
+[node name="Wizard" type="CharacterBody2D" groups=["pc"]]
 material = ExtResource("1_wrfyk")
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("2_frjc6")
-current = null
 character_resource = ExtResource("3_fu2wq")
 
 [node name="Indicator" parent="." instance=ExtResource("4_r42m2")]
@@ -559,12 +588,21 @@ script = ExtResource("15_1p5t4")
 
 [node name="MoveAudio" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("17_ebdqm")
+volume_db = 10.0
 
 [node name="DashAudio" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("17_2alwf")
 
+[node name="DamageAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("18_b0cep")
+volume_db = -10.0
+
 [node name="DeathAudio" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("16_dh5bx")
+
+[node name="HealAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("19_5vej3")
+volume_db = -5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

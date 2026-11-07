@@ -5,7 +5,6 @@ var lockon: bool = false
 var attack_direction: Vector2i
 
 func _on_enter() -> void:
-	super()
 	# play alert animation
 	lockon = true
 	indicator._start_alert()
@@ -13,6 +12,7 @@ func _on_enter() -> void:
 	lockon = false
 	# set speed to moving speed
 	SPEED = MOVE_SPEED
+	super()
 
 func _update_physics(_delta) -> void:
 	if !target:

@@ -383,3 +383,4 @@ one_shot = true
 [connection signal="body_entered" from="AnimatableBody2D/Area2D" to="." method="_on_target_area_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_anim_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ThrowTimer" to="." method="_on_throw_timer_timeout"]

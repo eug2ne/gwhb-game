@@ -29,7 +29,7 @@ func _set_current(new_current: bool) -> void:
 		# set pc state to idle
 		state_manager._set_current_state("idle")
 
-# TODO: convert eggshell into buff module
+# TODO: convert eggshell into module
 func _start_eggshell() -> void:
 	# start eggshell
 	effects_anim.play("eggshell")

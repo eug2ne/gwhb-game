@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dvpthewkuttia"]
+[gd_scene load_steps=55 format=3 uid="uid://dvpthewkuttia"]
 
 [ext_resource type="Script" path="res://character/player/PC.gd" id="1_fhjl8"]
 [ext_resource type="Material" uid="uid://b5sfgjat7dyv0" path="res://character/character shaders/pc_material.tres" id="1_tkqss"]
@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://c7kflsikk1vtb" path="res://assets/sfx/pc/gladiator/Gladiator-death.mp3" id="19_2jxym"]
 [ext_resource type="AudioStream" uid="uid://ekm7cw1bc1t" path="res://assets/sfx/pc/gladiator/Gladiator-bottle throw.mp3" id="19_lwebt"]
 [ext_resource type="AudioStream" uid="uid://dclkwxb1nohu8" path="res://assets/sfx/pc/gladiator/Gladiator-damage_1.mp3" id="20_j713x"]
+[ext_resource type="AudioStream" uid="uid://c3613pxai6e8l" path="res://assets/sfx/pc/pc-heal.mp3" id="22_6jay0"]
 [ext_resource type="Script" path="res://character/state machine/character states/Dead.gd" id="24_eshk6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0m35v"]
@@ -534,6 +535,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [1.0, 0.0, 1.0, 0.0]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioManager")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["HealAudio"],
+"method": &"_play_audio"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3pg2o"]
 _data = {
@@ -543,12 +558,11 @@ _data = {
 "heal": SubResource("Animation_6bx8b")
 }
 
-[node name="Gladiator" type="CharacterBody2D"]
+[node name="Gladiator" type="CharacterBody2D" groups=["pc"]]
 material = ExtResource("1_tkqss")
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_fhjl8")
-current = null
 character_resource = ExtResource("2_pipyw")
 
 [node name="Indicator" parent="." instance=ExtResource("4_0yxy1")]
@@ -578,12 +592,12 @@ animation = &"eggshell"
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("16_r812p")
 
-[node name="DashAudio" type="AudioStreamPlayer" parent="AudioManager"]
-stream = ExtResource("16_kwm5w")
-
 [node name="MoveAudio" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("18_hr1c1")
 volume_db = 10.0
+
+[node name="DashAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("16_kwm5w")
 
 [node name="BottleThrowAudio" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("19_lwebt")
@@ -593,6 +607,10 @@ stream = ExtResource("20_j713x")
 
 [node name="DeathAudio" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("19_2jxym")
+
+[node name="HealAudio" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("22_6jay0")
+volume_db = -5.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -9,7 +9,7 @@ func _on_animation_finished(_anim_name: String) -> void:
 	# deal damage on target
 	_deal_damage()
 	super(_anim_name)
-	
+
 func _deal_damage() -> void:
 	if !target:
 		return

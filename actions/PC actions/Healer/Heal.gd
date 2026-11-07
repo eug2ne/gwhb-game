@@ -82,19 +82,29 @@ func _start():
 	
 	# await hit signal
 	await target_hit
+	print("target hit")
 	# play action animation
 	anim.play("action")
 
 func _on_anim_finished(anim_name: StringName) -> void:
 	if anim_name == "action":
+		var parent_accuracy: float = parent.character_resource.accuracy
+		var parent_power: float = parent.character_resource.power
+		
+		# apply heal to target
+		var critical: bool = parent.character_resource._check_critical()
+		var recover: int = action_resource._deal_heal(parent_accuracy, parent_power, critical)
+		target._take_heal(recover, critical, parent)
+		
 		_stop()
 
 func _stop():
-	activated = false # can only throw 1 potion at a time (can later upgrade)
 	# reset position + visible
 	animatable_body.visible = false
 	animatable_body.global_position = parent.global_position
 	# reset action_available
+	activated = false
+	hit = false
 	action_available = true
 
 func _physics_process(delta: float) -> void:
@@ -122,15 +132,15 @@ func _on_target_area_body_entered(body) -> void:
 	# recover pc health
 	# get target
 	if body is Character && body.is_in_group(target_group) && body != parent:
+		target = body
 		hit = true
 		emit_signal("target_hit")
 		# stop timer
 		throw_timer.stop()
-		
-		var parent_accuracy: float = parent.character_resource.accuracy
-		var parent_power: float = parent.character_resource.power
-		
-		# apply recover to target
-		var critical: bool = parent.character_resource._check_critical()
-		var recover: int = action_resource._deal_heal(parent_accuracy, parent_power, critical)
-		body._take_heal(recover, critical, parent)
+
+func _on_throw_timer_timeout():
+	if hit:
+		return
+	
+	hit = true
+	emit_signal("target_hit")
